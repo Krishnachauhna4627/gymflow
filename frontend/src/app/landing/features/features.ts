@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Icon, IconName } from '../../shared/icon';
+import { Reveal } from '../../shared/reveal';
 
 @Component({
   selector: 'app-features',
-  imports: [Icon],
+  imports: [Icon, Reveal],
   templateUrl: './features.html',
   styleUrl: './features.scss',
 })

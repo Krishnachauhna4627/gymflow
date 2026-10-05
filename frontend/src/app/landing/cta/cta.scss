@@ -29,6 +29,19 @@
     height: 1px;
     background: currentColor;
   }
+
+  &::before {
+    transform-origin: right;
+  }
+
+  &::after {
+    transform-origin: left;
+  }
+
+  &.is-visible::before,
+  &.is-visible::after {
+    animation: draw-x 0.9s var(--ease-out) 200ms backwards;
+  }
 }
 
 h2 {

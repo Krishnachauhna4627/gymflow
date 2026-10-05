@@ -84,6 +84,21 @@ h2 {
   }
 }
 
+/* Entrance: card rises, its title rule draws, then the price lands */
+.card.is-visible {
+  h3 {
+    animation: enter-up 0.8s var(--ease-out) calc(var(--reveal-delay) + 150ms) backwards;
+  }
+
+  p {
+    animation: enter-fade 0.8s var(--ease-out) calc(var(--reveal-delay) + 300ms) backwards;
+  }
+
+  strong {
+    animation: enter-up 0.8s var(--ease-out) calc(var(--reveal-delay) + 420ms) backwards;
+  }
+}
+
 @media (max-width: 1024px) {
   .plans__inner {
     grid-template-columns: 1fr;

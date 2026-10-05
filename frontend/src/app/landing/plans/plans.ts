@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { Reveal } from '../../shared/reveal';
 
 @Component({
   selector: 'app-plans',
+  imports: [Reveal],
   templateUrl: './plans.html',
   styleUrl: './plans.scss',
 })

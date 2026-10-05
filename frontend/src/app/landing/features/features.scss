@@ -48,6 +48,21 @@ h2 {
   --icon-size: 26px;
 }
 
+/* Entrance: each tile rises, then its medallion, title and text follow (like the hero) */
+.feature.is-visible {
+  .feature__icon {
+    animation: medallion-in 0.7s var(--ease-out) calc(var(--reveal-delay) + 200ms) backwards;
+  }
+
+  h3 {
+    animation: enter-up 0.8s var(--ease-out) calc(var(--reveal-delay) + 320ms) backwards;
+  }
+
+  p {
+    animation: enter-up 0.8s var(--ease-out) calc(var(--reveal-delay) + 440ms) backwards;
+  }
+}
+
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);

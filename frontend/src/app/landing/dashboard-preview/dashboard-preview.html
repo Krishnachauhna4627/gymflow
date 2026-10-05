@@ -19,8 +19,8 @@
       <h4 class="title">Dashboard</h4>
 
       <div class="stats">
-        @for (stat of stats; track stat.label) {
-          <div class="stat">
+        @for (stat of stats; track stat.label; let i = $index) {
+          <div class="stat pop" [style.--pop-delay.ms]="900 + i * 110">
             <span class="stat__icon" [class]="'tone-' + stat.tone"><app-icon [name]="stat.icon" /></span>
             <div>
               <div class="stat__label">{{ stat.label }}</div>
@@ -40,8 +40,8 @@
               <tr><th>Member</th><th>Plan</th><th>Total</th><th>Paid</th><th>Due</th><th></th></tr>
             </thead>
             <tbody>
-              @for (row of pendingFees; track row.member) {
-                <tr>
+              @for (row of pendingFees; track row.member; let i = $index) {
+                <tr class="pop" [style.--pop-delay.ms]="1350 + i * 90">
                   <td>{{ row.member }}</td>
                   <td>{{ row.plan }}</td>
                   <td>{{ row.total }}</td>
@@ -78,8 +78,8 @@
             </ul>
           </div>
           <div class="panel__sub">Recent Check-ins</div>
-          @for (c of checkIns; track c.name) {
-            <div class="checkin">
+          @for (c of checkIns; track c.name; let i = $index) {
+            <div class="checkin pop" [style.--pop-delay.ms]="1500 + i * 90">
               <span class="avatar">{{ c.name[0] }}</span>{{ c.name }}<span class="time">{{ c.time }}</span>
             </div>
           }

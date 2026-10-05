@@ -1,13 +1,16 @@
 <section class="hero" id="top">
   <div class="container hero__inner">
     <div class="hero__copy">
-      <span class="eyebrow">Smart Gym Management</span>
-      <h1>Manage Your Gym <em>The Smart Way</em></h1>
-      <p class="hero__lead">
+      <span class="eyebrow enter" style="--enter-delay: 150ms">Smart Gym Management</span>
+      <h1>
+        <span class="enter" style="--enter-delay: 250ms">Manage Your Gym</span>
+        <em class="enter" style="--enter-delay: 400ms">The Smart Way</em>
+      </h1>
+      <p class="hero__lead enter" style="--enter-delay: 550ms">
         Members, membership plans, payments, attendance and reports — all in one simple platform.
       </p>
 
-      <div class="hero__actions">
+      <div class="hero__actions enter" style="--enter-delay: 700ms">
         <a class="btn btn--primary" href="#">
           Get Started <app-icon name="arrow-right" />
         </a>
@@ -17,8 +20,8 @@
       </div>
 
       <ul class="hero__highlights">
-        @for (item of highlights; track item) {
-          <li><app-icon name="check" />{{ item }}</li>
+        @for (item of highlights; track item; let i = $index) {
+          <li class="enter" [style.--enter-delay.ms]="900 + i * 120"><app-icon name="check" />{{ item }}</li>
         }
       </ul>
     </div>

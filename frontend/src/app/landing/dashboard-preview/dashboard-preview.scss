@@ -257,6 +257,7 @@ th {
 
   &__value {
     stroke: var(--forest);
+    animation: ring-draw 1.4s var(--ease-out) 1.2s backwards;
   }
 
   text {
@@ -307,5 +308,24 @@ th {
   .time {
     margin-left: auto;
     color: var(--muted);
+  }
+}
+
+/* ---------- Entrance: the dashboard "fills in" after the laptop lands ---------- */
+
+.pop {
+  animation: pop-in 0.6s var(--ease-out) var(--pop-delay, 0ms) backwards;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes ring-draw {
+  from {
+    stroke-dashoffset: 100;
   }
 }

@@ -1,11 +1,11 @@
 <section class="features" id="features">
   <div class="container">
-    <span class="eyebrow">Features</span>
-    <h2>Everything You Need to Run Your Gym</h2>
+    <span class="eyebrow" appReveal>Features</span>
+    <h2 appReveal="100">Everything You Need to Run Your Gym</h2>
 
     <div class="grid">
-      @for (feature of features; track feature.title) {
-        <article class="feature">
+      @for (feature of features; track feature.title; let i = $index) {
+        <article class="feature" [appReveal]="250 + (i % 3) * 150">
           <span class="feature__icon"><app-icon [name]="feature.icon" /></span>
           <h3>{{ feature.title }}</h3>
           <p>{{ feature.text }}</p>

@@ -5,6 +5,14 @@
   background: rgba(255, 253, 248, 0.96);
   border-bottom: 1px solid var(--rule);
   backdrop-filter: blur(6px);
+  animation: header-in 0.7s var(--ease-out) backwards;
+}
+
+@keyframes header-in {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
 }
 
 .header__inner {

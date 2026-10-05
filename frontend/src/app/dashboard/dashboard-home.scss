@@ -1,0 +1,209 @@
+.page-head {
+  margin-bottom: 32px;
+
+  .eyebrow {
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: clamp(30px, 3.2vw, 40px);
+
+    em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--brass);
+    }
+  }
+
+  p {
+    margin-top: 6px;
+    color: var(--muted);
+  }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 20px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.stat__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  --icon-size: 22px;
+}
+
+.tone-navy { color: var(--navy); }
+.tone-forest { color: var(--forest); }
+.tone-burgundy { color: var(--burgundy); }
+.tone-brass { color: var(--brass); }
+
+.stat__label {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.stat__value {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 700;
+  font-variant-numeric: lining-nums tabular-nums;
+  line-height: 1.15;
+  color: var(--navy);
+}
+
+.panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Panel per DESIGN_SYSTEM.md §3.6 */
+.panel {
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.panel__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+
+  h2 {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: 600;
+  }
+}
+
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--paper-deep);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  strong {
+    color: var(--navy);
+  }
+
+  p {
+    font-size: 14px;
+    color: var(--muted);
+  }
+}
+
+.step__marker {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-variant-numeric: lining-nums;
+  color: var(--muted);
+  --icon-size: 34px;
+}
+
+.step--done .step__marker {
+  border: 0;
+  color: var(--forest);
+}
+
+/* Badge per DESIGN_SYSTEM.md §3.8 */
+.badge {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--brass) 12%, var(--surface));
+  color: var(--brass);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 36px 16px;
+  text-align: center;
+
+  strong {
+    margin-top: 8px;
+    color: var(--navy);
+  }
+
+  p {
+    max-width: 280px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+}
+
+.empty__icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--brass);
+  border-radius: 50%;
+  outline: 1px solid var(--rule);
+  outline-offset: 4px;
+  color: var(--brass);
+  --icon-size: 24px;
+}
+
+@media (max-width: 1200px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

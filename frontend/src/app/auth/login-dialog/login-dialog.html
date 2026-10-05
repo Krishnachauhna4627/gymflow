@@ -1,0 +1,99 @@
+<dialog
+  #dialog
+  class="dialog dialog--narrow"
+  aria-labelledby="login-title"
+  (close)="onClosed()"
+  (pointerdown)="onPointerDown($event)"
+  (click)="onDialogClick($event)"
+>
+  <div class="dialog__panel">
+    <button class="dialog__close" type="button" aria-label="Close" (click)="requestClose()">
+      <app-icon name="close" />
+    </button>
+
+    <header class="dialog__head">
+      <span class="eyebrow">Welcome Back</span>
+      <h2 id="login-title">Log In</h2>
+      <p>Sign in to manage your gym.</p>
+    </header>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="field">
+        <label class="field__label" for="login-userId">User ID or Email</label>
+        <input
+          #userIdInput
+          id="login-userId"
+          class="input"
+          formControlName="userId"
+          autocomplete="username"
+          autocapitalize="none"
+          spellcheck="false"
+          placeholder="e.g. irongym"
+          [class.is-invalid]="showError('userId')"
+          [attr.aria-invalid]="showError('userId')"
+          aria-describedby="login-userId-error"
+        />
+        @if (showError('userId')) {
+          <span class="field__error" id="login-userId-error"
+            ><app-icon name="alert" />Enter your user ID or email.</span
+          >
+        }
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="login-password">Password</label>
+        <div class="input-group" [class.is-invalid]="showError('password')">
+          <input
+            #passwordInput
+            id="login-password"
+            class="input"
+            [type]="showPassword() ? 'text' : 'password'"
+            formControlName="password"
+            autocomplete="current-password"
+            placeholder="Your password"
+            [attr.aria-invalid]="showError('password')"
+            aria-describedby="login-password-error"
+          />
+          <button
+            class="input-group__action"
+            type="button"
+            [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+            [attr.aria-pressed]="showPassword()"
+            (click)="showPassword.update((v) => !v)"
+          >
+            <app-icon [name]="showPassword() ? 'eye-off' : 'eye'" />
+          </button>
+        </div>
+        @if (showError('password')) {
+          <span class="field__error" id="login-password-error"
+            ><app-icon name="alert" />Enter your password.</span
+          >
+        }
+      </div>
+
+      <label class="checkbox">
+        <input type="checkbox" formControlName="remember" />
+        Keep me logged in for 30 days
+      </label>
+
+      @if (formError(); as message) {
+        <div class="form__alert" role="alert"><app-icon name="alert" />{{ message }}</div>
+      }
+
+      <div class="form__actions login-actions">
+        <button class="btn btn--primary" type="submit" [disabled]="submitting()">
+          @if (submitting()) {
+            <span class="spinner" aria-hidden="true"></span> Logging In…
+          } @else {
+            Log In <app-icon name="arrow-right" />
+          }
+        </button>
+      </div>
+    </form>
+
+    <p class="switch">
+      New to GymFlow?
+      <button class="link" type="button" (click)="switchToRegister()">Create your gym</button>
+    </p>
+  </div>
+</dialog>

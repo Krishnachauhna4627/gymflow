@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Icon } from '../../shared/icon';
 import { Reveal } from '../../shared/reveal';
-import { RegisterDialog } from '../../gym-registration/register-dialog';
+import { AuthDialogs } from '../../auth/auth-dialogs';
 
 @Component({
   selector: 'app-cta',
@@ -10,5 +10,5 @@ import { RegisterDialog } from '../../gym-registration/register-dialog';
   styleUrl: './cta.scss',
 })
 export class Cta {
-  protected readonly registerDialog = inject(RegisterDialog);
+  protected readonly dialogs = inject(AuthDialogs);
 }

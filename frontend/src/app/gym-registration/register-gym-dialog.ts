@@ -3,7 +3,7 @@ import { Component, DestroyRef, ElementRef, effect, inject, signal, viewChild } 
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Icon } from '../shared/icon';
 import { ApiFieldErrors, GymApi, GymRegistration, GymRegistrationResult } from './gym-api';
-import { RegisterDialog } from './register-dialog';
+import { AuthDialogs } from '../auth/auth-dialogs';
 
 type FieldName = keyof GymRegistration;
 
@@ -40,7 +40,7 @@ const MESSAGES: Record<FieldName, Record<string, string>> = {
   styleUrl: './register-gym-dialog.scss',
 })
 export class RegisterGymDialog {
-  private readonly registerDialog = inject(RegisterDialog);
+  private readonly dialogs = inject(AuthDialogs);
   private readonly api = inject(GymApi);
   private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
   private readonly firstField = viewChild<ElementRef<HTMLInputElement>>('firstField');
@@ -77,10 +77,11 @@ export class RegisterGymDialog {
 
     effect(() => {
       const el = this.dialog().nativeElement;
-      if (this.registerDialog.isOpen() && !el.open) {
+      const open = this.dialogs.active() === 'register';
+      if (open && !el.open) {
         el.showModal();
         queueMicrotask(() => this.firstField()?.nativeElement.focus());
-      } else if (!this.registerDialog.isOpen() && el.open) {
+      } else if (!open && el.open) {
         el.close();
       }
     });
@@ -166,12 +167,21 @@ export class RegisterGymDialog {
   }
 
   protected requestClose(): void {
-    this.registerDialog.close();
+    this.dialogs.close('register');
+  }
+
+  /** After a successful signup, go straight to the login popup with the user ID filled in. */
+  protected logInNow(userId: string): void {
+    this.dialogs.openLogin(userId);
+  }
+
+  protected switchToLogin(): void {
+    this.dialogs.openLogin();
   }
 
   /** Native close (Esc key or dialog.close()) — keep state in sync and reset after a success. */
   protected onClosed(): void {
-    this.registerDialog.close();
+    this.dialogs.close('register');
     if (this.created()) {
       this.reset();
     }

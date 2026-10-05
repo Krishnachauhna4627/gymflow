@@ -1,0 +1,54 @@
+@if (session(); as s) {
+  <header class="page-head enter">
+    <span class="eyebrow">{{ today | date: 'EEEE, d MMMM y' }}</span>
+    <h1>Welcome, <em>{{ firstName() }}</em></h1>
+    <p>Here's what's happening at {{ s.gym.name }} today.</p>
+  </header>
+
+  <section class="stats" aria-label="Today at a glance">
+    @for (stat of stats; track stat.label; let i = $index) {
+      <article class="stat enter" [style.--enter-delay.ms]="150 + i * 100">
+        <span class="stat__icon" [class]="'tone-' + stat.tone"><app-icon [name]="stat.icon" /></span>
+        <div>
+          <div class="stat__label">{{ stat.label }}</div>
+          <div class="stat__value">{{ stat.value }}</div>
+        </div>
+      </article>
+    }
+  </section>
+
+  <div class="panels">
+    <section class="panel enter" style="--enter-delay: 550ms">
+      <div class="panel__head"><h2>Getting Started</h2></div>
+      <ol class="steps">
+        @for (step of steps; track step.title; let i = $index) {
+          <li class="step" [class.step--done]="step.done">
+            <span class="step__marker">
+              @if (step.done) {
+                <app-icon name="check" />
+              } @else {
+                {{ i + 1 }}
+              }
+            </span>
+            <div>
+              <strong>{{ step.title }}</strong>
+              <p>{{ step.text }}</p>
+            </div>
+            @if (!step.done) {
+              <span class="badge">Soon</span>
+            }
+          </li>
+        }
+      </ol>
+    </section>
+
+    <section class="panel enter" style="--enter-delay: 650ms">
+      <div class="panel__head"><h2>Pending Fees</h2></div>
+      <div class="empty">
+        <span class="empty__icon"><app-icon name="rupee" /></span>
+        <strong>No pending fees</strong>
+        <p>Fees due from members will appear here once you add members.</p>
+      </div>
+    </section>
+  </div>
+}

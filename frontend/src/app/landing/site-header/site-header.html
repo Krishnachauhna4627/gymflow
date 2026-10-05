@@ -17,8 +17,14 @@
         >
       }
       <div class="nav__actions">
-        <a class="btn btn--outline btn--sm" href="#">Login</a>
-        <button class="btn btn--primary btn--sm" type="button" (click)="openRegister()">Get Started</button>
+        @if (auth.isLoggedIn()) {
+          <a class="btn btn--primary btn--sm" routerLink="/dashboard">
+            Go to Dashboard <app-icon name="arrow-right" />
+          </a>
+        } @else {
+          <button class="btn btn--outline btn--sm" type="button" (click)="openLogin()">Login</button>
+          <button class="btn btn--primary btn--sm" type="button" (click)="openRegister()">Get Started</button>
+        }
       </div>
     </nav>
 

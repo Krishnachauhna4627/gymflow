@@ -200,6 +200,9 @@ Group long forms into `<fieldset>`s whose `<legend>` uses the eyebrow style, fol
 
 ### 3.3 Dropdown / select / menu
 
+**Implemented as `.dropdown` with `.dropdown__header` and `.dropdown__item` (`styles.scss`); see the
+dashboard user menu.**
+
 - **Trigger** looks exactly like an input (3.2), with a trailing chevron icon in `--muted`
   that rotates 180° when open.
 - **Panel:** `--surface` background, `1px solid var(--rule)` border, radius `--radius`,
@@ -230,6 +233,8 @@ Group long forms into `<fieldset>`s whose `<legend>` uses the eyebrow style, fol
   `05 Oct 2026`.
 
 ### 3.5 Checkbox, radio, toggle
+
+**Checkbox is implemented as `<label class="checkbox"><input type="checkbox" /> Text</label>`.**
 
 - Checkbox: 18px square, radius `--radius`, 1px `--rule` border on `--surface`; when
   checked, `--navy` fill with a `--paper` check mark.
@@ -270,6 +275,12 @@ Group long forms into `<fieldset>`s whose `<legend>` uses the eyebrow style, fol
 - Breadcrumbs: 14px `--muted` with `/` separators; the current page is `--navy`.
 
 ### 3.10 Modals, dialogs, toasts
+
+**Implemented globally:** use a native `<dialog class="dialog">` opened with `showModal()`, containing
+`.dialog__panel`, `.dialog__close`, `.dialog__head`, and inside it `.form`, `.form__group`
+(fieldset), `.form__row`, `.form__alert`, `.form__actions` and `.spinner`. Every modal has a 3px
+brass top border. Use `.dialog--narrow` (440px) for short forms such as login. Never style a new
+modal from scratch.
 
 - Backdrop: `rgba(17, 28, 46, 0.55)`.
 - Modal: `--surface`, radius `--radius`, `var(--shadow-overlay)`, max width 560px, 32px

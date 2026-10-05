@@ -17,6 +17,8 @@ export type IconName =
   | 'search'
   | 'rupee'
   | 'upload'
+  | 'chevron-down'
+  | 'logout'
   | 'image'
   | 'eye'
   | 'eye-off'
@@ -113,6 +115,12 @@ export type IconName =
         }
         @case ('rupee') {
           <path d="M7 4h10M7 8.5h10M7 4h3.5a4.5 4.5 0 0 1 0 9H7l7 7" />
+        }
+        @case ('chevron-down') {
+          <path d="M6 9l6 6 6-6" />
+        }
+        @case ('logout') {
+          <path d="M9 4H5.5A1.5 1.5 0 0 0 4 5.5v13A1.5 1.5 0 0 0 5.5 20H9M14.5 16.5L19 12l-4.5-4.5M19 12H9" />
         }
         @case ('upload') {
           <path d="M12 15V4M7.5 8.5L12 4l4.5 4.5M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15" />

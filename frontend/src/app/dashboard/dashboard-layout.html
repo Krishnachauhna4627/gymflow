@@ -1,0 +1,93 @@
+@if (session(); as s) {
+  <div class="shell" [class.shell--nav-open]="sidebarOpen()">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="gym">
+        <span class="gym__logo">
+          @if (s.gym.logoUrl && !logoFailed()) {
+            <img [src]="s.gym.logoUrl" [alt]="s.gym.name + ' logo'" (error)="logoFailed.set(true)" />
+          } @else {
+            <span class="gym__monogram" aria-hidden="true">{{ gymInitials() }}</span>
+          }
+        </span>
+        <span class="gym__name">{{ s.gym.name }}</span>
+      </div>
+
+      <nav class="nav">
+        @for (item of nav; track item.label) {
+          @if (item.link) {
+            <a
+              class="nav__item"
+              [routerLink]="item.link"
+              routerLinkActive="nav__item--active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="sidebarOpen.set(false)"
+            >
+              <app-icon [name]="item.icon" /> {{ item.label }}
+            </a>
+          } @else {
+            <span class="nav__item nav__item--soon" aria-disabled="true" title="Coming soon">
+              <app-icon [name]="item.icon" /> {{ item.label }} <em>Soon</em>
+            </span>
+          }
+        }
+      </nav>
+
+      <div class="sidebar__foot"><app-icon name="dumbbell" [strokeWidth]="2.2" /><span>Gym<em>Flow</em></span></div>
+    </aside>
+
+    <button
+      class="scrim"
+      type="button"
+      tabindex="-1"
+      aria-hidden="true"
+      (click)="sidebarOpen.set(false)"
+    ></button>
+
+    <div class="main">
+      <header class="topbar">
+        <button
+          class="icon-btn menu-toggle"
+          type="button"
+          aria-label="Open navigation"
+          (click)="sidebarOpen.set(true)"
+        >
+          <app-icon name="menu" />
+        </button>
+
+        <div class="topbar__actions">
+          <button class="icon-btn" type="button" aria-label="Notifications"><app-icon name="bell" /></button>
+
+          <div class="user-menu">
+            <button
+              class="user-menu__trigger"
+              type="button"
+              aria-haspopup="menu"
+              [attr.aria-expanded]="userMenuOpen()"
+              (click)="toggleUserMenu($event)"
+            >
+              <span class="avatar">{{ initials() }}</span>
+              <span class="user-menu__name">{{ s.user.name }}</span>
+              <app-icon name="chevron-down" class="user-menu__chevron" [class.is-open]="userMenuOpen()" />
+            </button>
+
+            @if (userMenuOpen()) {
+              <div class="dropdown user-menu__panel" role="menu">
+                <div class="dropdown__header">
+                  <strong>{{ s.user.name }}</strong>
+                  <span>{{ s.user.email }}</span>
+                </div>
+                <button class="dropdown__item" type="button" role="menuitem" [disabled]="loggingOut()" (click)="logout()">
+                  <app-icon name="logout" /> {{ loggingOut() ? 'Logging out…' : 'Log Out' }}
+                </button>
+              </div>
+            }
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <router-outlet />
+      </main>
+    </div>
+  </div>
+}

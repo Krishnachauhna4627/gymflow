@@ -1,16 +1,18 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
 import { App } from './app';
 import { LandingPage } from './landing/landing-page';
 
 describe('App', () => {
   it('should create the app', async () => {
-    await TestBed.configureTestingModule({ imports: [App], providers: [provideRouter([])] }).compileComponents();
+    await TestBed.configureTestingModule({ imports: [App], providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()] }).compileComponents();
     expect(TestBed.createComponent(App).componentInstance).toBeTruthy();
   });
 
   it('should render the landing headline', async () => {
-    await TestBed.configureTestingModule({ imports: [LandingPage], providers: [provideRouter([])] }).compileComponents();
+    await TestBed.configureTestingModule({ imports: [LandingPage], providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()] }).compileComponents();
     const fixture = TestBed.createComponent(LandingPage);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;

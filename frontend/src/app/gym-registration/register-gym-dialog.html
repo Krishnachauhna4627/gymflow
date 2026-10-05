@@ -26,7 +26,9 @@
         @if (result.gym.logoUrl) {
           <p class="success__note">Your logo will appear on your dashboard after you log in.</p>
         }
-        <button class="btn btn--primary" type="button" (click)="requestClose()">Done</button>
+        <button class="btn btn--primary" type="button" (click)="logInNow(result.owner.userId)">
+          Log In Now <app-icon name="arrow-right" />
+        </button>
       </div>
     } @else {
       <header class="dialog__head">
@@ -257,6 +259,11 @@
           </button>
         </div>
       </form>
+
+      <p class="switch">
+        Already registered?
+        <button class="link" type="button" (click)="switchToLogin()">Log in</button>
+      </p>
     }
   </div>
 </dialog>

@@ -5,11 +5,10 @@ import { Features } from './features/features';
 import { Plans } from './plans/plans';
 import { Cta } from './cta/cta';
 import { SiteFooter } from './site-footer/site-footer';
-import { RegisterGymDialog } from '../gym-registration/register-gym-dialog';
 
 @Component({
   selector: 'app-landing-page',
-  imports: [SiteHeader, Hero, Features, Plans, Cta, SiteFooter, RegisterGymDialog],
+  imports: [SiteHeader, Hero, Features, Plans, Cta, SiteFooter],
   template: `
     <app-site-header />
     <main>
@@ -19,7 +18,6 @@ import { RegisterGymDialog } from '../gym-registration/register-gym-dialog';
       <app-cta />
     </main>
     <app-site-footer />
-    <app-register-gym-dialog />
   `,
 })
 export class LandingPage {}

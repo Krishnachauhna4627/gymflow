@@ -1,7 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Icon } from '../../shared/icon';
-import { RegisterDialog } from '../../gym-registration/register-dialog';
+import { AuthDialogs } from '../../auth/auth-dialogs';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-site-header',
@@ -10,7 +11,8 @@ import { RegisterDialog } from '../../gym-registration/register-dialog';
   styleUrl: './site-header.scss',
 })
 export class SiteHeader {
-  private readonly registerDialog = inject(RegisterDialog);
+  private readonly dialogs = inject(AuthDialogs);
+  protected readonly auth = inject(AuthService);
 
   protected readonly menuOpen = signal(false);
 
@@ -25,6 +27,11 @@ export class SiteHeader {
 
   protected openRegister(): void {
     this.menuOpen.set(false);
-    this.registerDialog.open();
+    this.dialogs.openRegister();
+  }
+
+  protected openLogin(): void {
+    this.menuOpen.set(false);
+    this.dialogs.openLogin();
   }
 }

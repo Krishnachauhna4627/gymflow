@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Icon } from '../../shared/icon';
 import { DashboardPreview } from '../dashboard-preview/dashboard-preview';
-import { RegisterDialog } from '../../gym-registration/register-dialog';
+import { AuthDialogs } from '../../auth/auth-dialogs';
 
 @Component({
   selector: 'app-hero',
@@ -10,6 +10,6 @@ import { RegisterDialog } from '../../gym-registration/register-dialog';
   styleUrl: './hero.scss',
 })
 export class Hero {
-  protected readonly registerDialog = inject(RegisterDialog);
+  protected readonly dialogs = inject(AuthDialogs);
   protected readonly highlights = ['Easy to use', 'No credit card required', 'Built for gym owners'];
 }

@@ -1,7 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RegisterDialog } from './register-dialog';
+import { AuthDialogs } from '../auth/auth-dialogs';
 import { RegisterGymDialog } from './register-gym-dialog';
 
 describe('RegisterGymDialog', () => {
@@ -48,7 +48,7 @@ describe('RegisterGymDialog', () => {
     fixture = TestBed.createComponent(RegisterGymDialog);
     http = TestBed.inject(HttpTestingController);
     el = fixture.nativeElement;
-    TestBed.inject(RegisterDialog).open();
+    TestBed.inject(AuthDialogs).openRegister();
     await fixture.whenStable();
   });
 

@@ -11,12 +11,12 @@
       </p>
 
       <div class="hero__actions enter" style="--enter-delay: 700ms">
-        <a class="btn btn--primary" href="#">
+        <button class="btn btn--primary" type="button" (click)="registerDialog.open()">
           Get Started <app-icon name="arrow-right" />
-        </a>
-        <a class="btn btn--outline" href="#">
+        </button>
+        <button class="btn btn--outline" type="button" (click)="registerDialog.open()">
           <app-icon name="play" /> See Demo
-        </a>
+        </button>
       </div>
 
       <ul class="hero__highlights">

@@ -64,6 +64,19 @@ a {
   text-decoration: none;
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Lock page scroll while a modal <dialog> is open */
+:root:has(dialog[open]) {
+  overflow: hidden;
+}
+
 /* One focus style for every interactive element (keyboard only) */
 :focus-visible {
   outline: 2px solid var(--brass);
@@ -107,6 +120,7 @@ a {
   font-family: var(--font-sans);
   font-size: 16px;
   font-weight: 600;
+  line-height: 1.6;
   letter-spacing: 0.04em;
   cursor: pointer;
   transition:
@@ -153,6 +167,139 @@ a {
     opacity: 0.45;
     pointer-events: none;
   }
+}
+
+/* ---------- Form fields (DESIGN_SYSTEM.md §3.2) ---------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.field__hint {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.field__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--burgundy);
+  --icon-size: 15px;
+}
+
+/* Text-style action (DESIGN_SYSTEM.md §3.1): works on <a> and <button> */
+.link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--brass);
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* .input is the field itself; .input-group wraps an input with a prefix and/or suffix */
+.input,
+.input-group {
+  width: 100%;
+  min-height: 46px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  font-size: 16px;
+  color: var(--ink);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.input {
+  padding: 10px 14px;
+
+  &::placeholder {
+    color: var(--muted);
+    opacity: 0.8;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-color: var(--navy);
+    box-shadow: var(--focus-ring);
+  }
+
+  &:disabled {
+    background: var(--paper-deep);
+    color: var(--muted);
+  }
+}
+
+.input-group {
+  display: flex;
+  align-items: stretch;
+
+  &:focus-within {
+    border-color: var(--navy);
+    box-shadow: var(--focus-ring);
+  }
+
+  .input {
+    flex: 1;
+    min-width: 0;
+    min-height: 44px;
+    border: 0;
+    background: transparent;
+
+    &:focus,
+    &:focus-visible {
+      box-shadow: none;
+    }
+  }
+}
+
+.input-group__addon {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  border-right: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.input-group__action {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  --icon-size: 19px;
+
+  &:hover {
+    color: var(--navy);
+  }
+}
+
+.input.is-invalid,
+.input-group.is-invalid {
+  border-color: var(--burgundy);
 }
 
 /* ---------- Motion ---------- */

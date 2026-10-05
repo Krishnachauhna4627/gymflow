@@ -16,6 +16,11 @@ export type IconName =
   | 'bell'
   | 'search'
   | 'rupee'
+  | 'upload'
+  | 'image'
+  | 'eye'
+  | 'eye-off'
+  | 'alert'
   | 'menu'
   | 'close'
   | 'facebook'
@@ -108,6 +113,25 @@ export type IconName =
         }
         @case ('rupee') {
           <path d="M7 4h10M7 8.5h10M7 4h3.5a4.5 4.5 0 0 1 0 9H7l7 7" />
+        }
+        @case ('upload') {
+          <path d="M12 15V4M7.5 8.5L12 4l4.5 4.5M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15" />
+        }
+        @case ('image') {
+          <rect x="3" y="4" width="18" height="16" rx="1.5" />
+          <circle cx="8.5" cy="9.5" r="1.5" />
+          <path d="M21 16l-5-5-8 8" />
+        }
+        @case ('eye') {
+          <path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" />
+          <circle cx="12" cy="12" r="3" />
+        }
+        @case ('eye-off') {
+          <path d="M4 4l16 16M9.9 5.7A10.6 10.6 0 0 1 12 5.5c6.4 0 10 6.5 10 6.5a17 17 0 0 1-3 3.8M6.3 7.4C3.6 9.2 2 12 2 12s3.6 6.5 10 6.5c1.6 0 3-.4 4.2-1M9.9 9.9a3 3 0 0 0 4.2 4.2" />
+        }
+        @case ('alert') {
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 7.5v5M12 16h.01" />
         }
         @case ('menu') {
           <path d="M4 7h16M4 12h16M4 17h16" />

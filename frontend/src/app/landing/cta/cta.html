@@ -3,6 +3,8 @@
     <span class="ornament" aria-hidden="true" appReveal>◆</span>
     <h2 appReveal="120">Ready to Get Started?</h2>
     <p appReveal="250">Join hundreds of gym owners who trust GymFlow to manage their gym.</p>
-    <a class="btn btn--brass" href="#" appReveal="400">Create Your Gym <app-icon name="arrow-right" /></a>
+    <button class="btn btn--brass" type="button" appReveal="400" (click)="registerDialog.open()">
+      Create Your Gym <app-icon name="arrow-right" />
+    </button>
   </div>
 </section>

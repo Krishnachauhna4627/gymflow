@@ -1,0 +1,262 @@
+<dialog
+  #dialog
+  class="dialog"
+  aria-labelledby="register-title"
+  (close)="onClosed()"
+  (pointerdown)="onPointerDown($event)"
+  (click)="onDialogClick($event)"
+>
+  <div class="dialog__panel">
+    <button class="dialog__close" type="button" aria-label="Close" (click)="requestClose()">
+      <app-icon name="close" />
+    </button>
+
+    @if (created(); as result) {
+      <div class="success">
+        @if (logoPreview(); as logo) {
+          <span class="success__logo"><img [src]="logo" [alt]="result.gym.name + ' logo'" /></span>
+        } @else {
+          <span class="success__medallion"><app-icon name="check" /></span>
+        }
+        <h2 id="register-title">Your Gym Is Ready</h2>
+        <p>
+          <strong>{{ result.gym.name }}</strong> has been created. Log in with your user ID
+          <strong>{{ result.owner.userId }}</strong> and the password you just set.
+        </p>
+        @if (result.gym.logoUrl) {
+          <p class="success__note">Your logo will appear on your dashboard after you log in.</p>
+        }
+        <button class="btn btn--primary" type="button" (click)="requestClose()">Done</button>
+      </div>
+    } @else {
+      <header class="dialog__head">
+        <span class="eyebrow">Get Started</span>
+        <h2 id="register-title">Create Your Gym</h2>
+        <p>Set up your gym and your owner login in under a minute.</p>
+      </header>
+
+      <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <fieldset class="form__group">
+          <legend>Gym Details</legend>
+
+          <div class="gym-row">
+            <div
+              class="logo-tile"
+              [class.logo-tile--filled]="logoPreview()"
+              [class.logo-tile--drag]="logoDragOver()"
+              [class.is-invalid]="logoError()"
+              aria-hidden="true"
+              (click)="logoInput.click()"
+              (dragover)="onLogoDragOver($event)"
+              (dragleave)="logoDragOver.set(false)"
+              (drop)="onLogoDrop($event)"
+            >
+              @if (logoPreview(); as logo) {
+                <img [src]="logo" alt="" />
+              } @else {
+                <app-icon name="image" />
+                <span>Logo</span>
+              }
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="gymName">Gym Name</label>
+              <input
+                #firstField
+                id="gymName"
+                class="input"
+                formControlName="gymName"
+                autocomplete="organization"
+                placeholder="e.g. Iron Gym"
+                [class.is-invalid]="showError('gymName')"
+                [attr.aria-invalid]="showError('gymName')"
+                aria-describedby="gymName-error"
+              />
+              @if (showError('gymName')) {
+                <span class="field__error" id="gymName-error"
+                  ><app-icon name="alert" />{{ errorFor('gymName') }}</span
+                >
+              }
+
+              <div class="logo-actions">
+                <input
+                  #logoInput
+                  id="logo"
+                  type="file"
+                  hidden
+                  [accept]="logoTypes"
+                  (change)="onLogoPicked($event)"
+                />
+                <button
+                  class="btn btn--outline btn--sm"
+                  type="button"
+                  aria-describedby="logo-help"
+                  [attr.aria-invalid]="!!logoError()"
+                  (click)="logoInput.click()"
+                >
+                  <app-icon name="upload" /> {{ logoFile() ? 'Change Logo' : 'Upload Logo' }}
+                </button>
+                @if (logoFile()) {
+                  <button class="link" type="button" (click)="removeLogo()">Remove</button>
+                }
+              </div>
+              @if (logoError(); as message) {
+                <span class="field__error" id="logo-help" role="alert"
+                  ><app-icon name="alert" />{{ message }}</span
+                >
+              } @else {
+                <span class="field__hint" id="logo-help">
+                  Optional · PNG, JPG or WebP, up to 2 MB. Shown on your dashboard after login.
+                </span>
+              }
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form__group">
+          <legend>Owner Details</legend>
+
+          <div class="field">
+            <label class="field__label" for="ownerName">Owner Name</label>
+            <input
+              id="ownerName"
+              class="input"
+              formControlName="ownerName"
+              autocomplete="name"
+              placeholder="Your full name"
+              [class.is-invalid]="showError('ownerName')"
+              [attr.aria-invalid]="showError('ownerName')"
+              aria-describedby="ownerName-error"
+            />
+            @if (showError('ownerName')) {
+              <span class="field__error" id="ownerName-error"
+                ><app-icon name="alert" />{{ errorFor('ownerName') }}</span
+              >
+            }
+          </div>
+
+          <div class="form__row">
+            <div class="field">
+              <label class="field__label" for="mobile">Mobile</label>
+              <div class="input-group" [class.is-invalid]="showError('mobile')">
+                <span class="input-group__addon">+91</span>
+                <input
+                  id="mobile"
+                  class="input"
+                  type="tel"
+                  inputmode="numeric"
+                  formControlName="mobile"
+                  autocomplete="tel-national"
+                  placeholder="98765 43210"
+                  [attr.aria-invalid]="showError('mobile')"
+                  aria-describedby="mobile-error"
+                />
+              </div>
+              @if (showError('mobile')) {
+                <span class="field__error" id="mobile-error"
+                  ><app-icon name="alert" />{{ errorFor('mobile') }}</span
+                >
+              }
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="email">Email</label>
+              <input
+                id="email"
+                class="input"
+                type="email"
+                formControlName="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+                [class.is-invalid]="showError('email')"
+                [attr.aria-invalid]="showError('email')"
+                aria-describedby="email-error"
+              />
+              @if (showError('email')) {
+                <span class="field__error" id="email-error"
+                  ><app-icon name="alert" />{{ errorFor('email') }}</span
+                >
+              }
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form__group">
+          <legend>Login Details</legend>
+
+          <div class="form__row">
+            <div class="field">
+              <label class="field__label" for="userId">User ID</label>
+              <input
+                id="userId"
+                class="input"
+                formControlName="userId"
+                autocomplete="username"
+                autocapitalize="none"
+                spellcheck="false"
+                placeholder="e.g. irongym"
+                [class.is-invalid]="showError('userId')"
+                [attr.aria-invalid]="showError('userId')"
+                aria-describedby="userId-help"
+              />
+              @if (showError('userId')) {
+                <span class="field__error" id="userId-help"
+                  ><app-icon name="alert" />{{ errorFor('userId') }}</span
+                >
+              } @else {
+                <span class="field__hint" id="userId-help">You'll use this to log in.</span>
+              }
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="password">Password</label>
+              <div class="input-group" [class.is-invalid]="showError('password')">
+                <input
+                  id="password"
+                  class="input"
+                  [type]="showPassword() ? 'text' : 'password'"
+                  formControlName="password"
+                  autocomplete="new-password"
+                  placeholder="At least 8 characters"
+                  [attr.aria-invalid]="showError('password')"
+                  aria-describedby="password-help"
+                />
+                <button
+                  class="input-group__action"
+                  type="button"
+                  [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+                  [attr.aria-pressed]="showPassword()"
+                  (click)="showPassword.update((v) => !v)"
+                >
+                  <app-icon [name]="showPassword() ? 'eye-off' : 'eye'" />
+                </button>
+              </div>
+              @if (showError('password')) {
+                <span class="field__error" id="password-help"
+                  ><app-icon name="alert" />{{ errorFor('password') }}</span
+                >
+              } @else {
+                <span class="field__hint" id="password-help">Use a letter and a number.</span>
+              }
+            </div>
+          </div>
+        </fieldset>
+
+        @if (formError(); as message) {
+          <div class="form__alert" role="alert"><app-icon name="alert" />{{ message }}</div>
+        }
+
+        <div class="form__actions">
+          <button class="btn btn--outline" type="button" (click)="requestClose()">Cancel</button>
+          <button class="btn btn--primary" type="submit" [disabled]="submitting()">
+            @if (submitting()) {
+              <span class="spinner" aria-hidden="true"></span> Creating…
+            } @else {
+              Create Gym
+            }
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+</dialog>

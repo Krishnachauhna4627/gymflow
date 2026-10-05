@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Icon } from '../../shared/icon';
+import { RegisterDialog } from '../../gym-registration/register-dialog';
 
 @Component({
   selector: 'app-site-header',
@@ -9,6 +10,8 @@ import { Icon } from '../../shared/icon';
   styleUrl: './site-header.scss',
 })
 export class SiteHeader {
+  private readonly registerDialog = inject(RegisterDialog);
+
   protected readonly menuOpen = signal(false);
 
   protected readonly links = [
@@ -19,4 +22,9 @@ export class SiteHeader {
     { label: 'About', fragment: 'about' },
     { label: 'Contact', fragment: 'contact' },
   ];
+
+  protected openRegister(): void {
+    this.menuOpen.set(false);
+    this.registerDialog.open();
+  }
 }

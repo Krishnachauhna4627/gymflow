@@ -170,9 +170,24 @@ All states must be implemented. **Focus** everywhere is the global `:focus-visib
 - Disabled: `opacity: 0.45`, no pointer events (already in `.btn`).
 - **One primary button per view or section.** Pair it with an outline button, not a second
   primary.
-- Text links use `--brass`, weight 600, no underline; underline on hover.
+- Text links use `--brass`, weight 600, no underline; underline on hover. Use the `.link` class,
+  which works on both `<a>` and `<button>` (e.g. "Remove").
+- File uploads (e.g. the gym logo) use a square preview tile (dashed `--rule` border when empty,
+  solid with the image when filled; brass on hover/drag), next to an outline `.btn--sm`
+  "Upload" button and a `.link` "Remove" action.
 
 ### 3.2 Form inputs (text, number, search, textarea)
+
+**Implemented in `styles.scss`. Always use these classes:**
+- `.field`: the wrapper.
+- `.field__label`, `.field__hint`, `.field__error`: the label, helper text and error message.
+- `.input`: the field itself.
+- `.input-group`: wraps a field that has a prefix (`.input-group__addon`, e.g. `+91`) or a
+  suffix button (`.input-group__action`, e.g. show/hide password).
+- `.is-invalid` marks a field with an error.
+
+Group long forms into `<fieldset>`s whose `<legend>` uses the eyebrow style, followed by a
+`--rule` line (see `register-gym-dialog`).
 
 - Height 46px (textarea: auto), padding 12px 14px, `--surface` background,
   `1px solid var(--rule)`, radius `--radius`, sans 16px `--ink`.

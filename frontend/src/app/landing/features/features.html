@@ -1,0 +1,16 @@
+<section class="features" id="features">
+  <div class="container">
+    <span class="eyebrow">Features</span>
+    <h2>Everything You Need to Run Your Gym</h2>
+
+    <div class="grid">
+      @for (feature of features; track feature.title) {
+        <article class="feature">
+          <span class="feature__icon"><app-icon [name]="feature.icon" /></span>
+          <h3>{{ feature.title }}</h3>
+          <p>{{ feature.text }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>

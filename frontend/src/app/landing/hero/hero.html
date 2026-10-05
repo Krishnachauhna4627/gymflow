@@ -1,0 +1,30 @@
+<section class="hero" id="top">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <span class="eyebrow">Smart Gym Management</span>
+      <h1>Manage Your Gym <em>The Smart Way</em></h1>
+      <p class="hero__lead">
+        Members, membership plans, payments, attendance and reports — all in one simple platform.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#">
+          Get Started <app-icon name="arrow-right" />
+        </a>
+        <a class="btn btn--outline" href="#">
+          <app-icon name="play" /> See Demo
+        </a>
+      </div>
+
+      <ul class="hero__highlights">
+        @for (item of highlights; track item) {
+          <li><app-icon name="check" />{{ item }}</li>
+        }
+      </ul>
+    </div>
+
+    <div class="hero__visual">
+      <app-dashboard-preview />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,101 @@
+.plans {
+  padding: 80px 0;
+  background: var(--paper-deep);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.plans__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+  align-items: center;
+  gap: 48px;
+}
+
+h2 {
+  font-size: clamp(28px, 3vw, 38px);
+}
+
+.plans__intro p {
+  margin-top: 16px;
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+/* Double rule border for an engraved, classic card edge */
+.card {
+  padding: 24px 12px;
+  background: var(--surface);
+  border: 3px double var(--rule);
+  text-align: center;
+  font-variant-numeric: lining-nums;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+
+  &:hover {
+    border-color: var(--brass);
+    transform: translateY(-3px);
+  }
+
+  h3 {
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 22px;
+  }
+
+  p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  strong {
+    display: block;
+    margin-top: 14px;
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--navy);
+  }
+
+  &--custom {
+    background: var(--navy);
+    border-color: var(--brass);
+
+    h3,
+    strong {
+      color: var(--brass-light);
+    }
+
+    h3 {
+      border-color: rgba(201, 169, 110, 0.35);
+    }
+
+    p {
+      color: rgba(248, 244, 236, 0.75);
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .plans__inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card--custom {
+    grid-column: 1 / -1;
+  }
+}

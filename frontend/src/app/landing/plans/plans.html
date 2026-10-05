@@ -1,0 +1,19 @@
+<section class="plans" id="pricing">
+  <div class="container plans__inner">
+    <div class="plans__intro">
+      <span class="eyebrow">Flexible Plans</span>
+      <h2>Create Your Own Membership Plans</h2>
+      <p>Set up any plan you want. 3+1, 4+1, 5+1 or custom plans with months or days.</p>
+    </div>
+
+    <div class="cards">
+      @for (plan of plans; track plan.name; let last = $last) {
+        <article class="card" [class.card--custom]="last">
+          <h3>{{ plan.name }}</h3>
+          <p>{{ plan.detail }}<br />{{ plan.duration }}</p>
+          <strong>{{ plan.price }}</strong>
+        </article>
+      }
+    </div>
+  </div>
+</section>

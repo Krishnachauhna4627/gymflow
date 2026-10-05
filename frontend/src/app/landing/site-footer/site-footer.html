@@ -1,0 +1,18 @@
+<footer class="footer" id="contact">
+  <div class="container footer__inner">
+    <div class="brand"><app-icon name="dumbbell" [strokeWidth]="2.2" /><span>Gym<em>Flow</em></span></div>
+    <p class="copy">© {{ year }} GymFlow. All rights reserved.</p>
+
+    <nav class="links" aria-label="Footer">
+      @for (link of links; track link) {
+        <a href="#">{{ link }}</a>
+      }
+    </nav>
+
+    <div class="socials">
+      @for (social of socials; track social.label) {
+        <a href="#" [attr.aria-label]="social.label"><app-icon [name]="social.icon" /></a>
+      }
+    </div>
+  </div>
+</footer>
